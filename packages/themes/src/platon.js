@@ -8,7 +8,7 @@ import {
 
 // Background
 export const background = platonColors.white;
-export const backgroundInverse = platonColors.platonColors.grey100;
+export const backgroundInverse = platonColors.grey100;
 export const backgroundBrand = platonColors.purple70;
 export const backgroundActive = platonColors.purple60;
 export const backgroundHover = platonColors.purple60; // TODO: ask Taikonauten for a value
@@ -32,11 +32,11 @@ export const layerSelected02 = platonColors.white;
 export const layerSelectedHover02 = platonColors.grey20;
 
 // layer-03
-export const layer03 = platonColors.platonColors.grey10; // TODO: ask Taikonauten for a value
-export const layerActive03 = platonColors.platonColors.grey30; // TODO: ask Taikonauten for a value
-export const layerHover03 = platonColors.platonColors.grey10; // TODO: ask Taikonauten for a value
-export const layerSelected03 = platonColors.platonColors.grey20; // TODO: ask Taikonauten for a value
-export const layerSelectedHover03 = platonColors.platonColors.grey20; // TODO: ask Taikonauten for a value
+export const layer03 = platonColors.grey10; // TODO: ask Taikonauten for a value
+export const layerActive03 = platonColors.grey30; // TODO: ask Taikonauten for a value
+export const layerHover03 = platonColors.grey10; // TODO: ask Taikonauten for a value
+export const layerSelected03 = platonColors.grey20; // TODO: ask Taikonauten for a value
+export const layerSelectedHover03 = platonColors.grey20; // TODO: ask Taikonauten for a value
 
 // layer
 export const layerSelectedInverse = platonColors.grey90;
@@ -53,9 +53,9 @@ export const layerAccentActive02 = platonColors.grey40; // TODO: ask Taikonauten
 export const layerAccentHover02 = platonColors.grey20; // TODO: ask Taikonauten for a value
 
 // layer-accent-03
-export const layerAccent03 = platonColors.platonColors.grey20; // TODO: ask Taikonauten for a value
-export const layerAccentActive03 = platonColors.platonColors.grey40; // TODO: ask Taikonauten for a value
-export const layerAccentHover03 = platonColors.platonColors.grey20; // TODO: ask Taikonauten for a value
+export const layerAccent03 = platonColors.grey20; // TODO: ask Taikonauten for a value
+export const layerAccentActive03 = platonColors.grey40; // TODO: ask Taikonauten for a value
+export const layerAccentHover03 = platonColors.grey20; // TODO: ask Taikonauten for a value
 
 // Field
 // field-01
