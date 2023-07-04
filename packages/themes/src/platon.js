@@ -14,7 +14,7 @@ export const backgroundActive = platonColors.purple60;
 export const backgroundHover = platonColors.purple60; // TODO: ask Taikonauten for a value
 export const backgroundInverseHover = platonColors.grey80;
 export const backgroundSelected = platonColors.grey50; // TODO: ask Taikonauten for a value
-export const backgroundSelectedHover = platonColors.ray50; // TODO: ask Taikonauten for a value
+export const backgroundSelectedHover = platonColors.grey50; // TODO: ask Taikonauten for a value
 
 // Layer
 // layer-01
