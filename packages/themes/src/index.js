@@ -10,6 +10,7 @@ import * as g10 from './g10';
 import * as g90 from './g90';
 import * as g100 from './g100';
 import * as v10 from './v10';
+import * as platon from './platon';
 import * as buttonTokens from './component-tokens/button';
 import * as tagTokens from './component-tokens/tag';
 import * as notificationTokens from './component-tokens/notification';
@@ -21,6 +22,7 @@ const themes = {
   g10,
   g90,
   g100,
+  platon,
 };
 
 export * from './white';
@@ -29,6 +31,7 @@ export {
   g10,
   g90,
   g100,
+  platon,
   themes,
   v10,
   buttonTokens,

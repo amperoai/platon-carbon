@@ -1,0 +1,69 @@
+name: Deploy React storybook to GitHub Pages
+
+permissions:
+  id-token: write
+  contents: read
+
+on: [pull_request]
+
+concurrency:
+  group:
+    ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  BUCKET_NAME: 'ampero-platon-carbon-staging'
+  PR_NUMBER: ${{ github.event.number }}
+  AWS_REGION: 'eu-central-1'
+  AWS_IAM_OIDC_GITHUB_ROLE_ARN: 'arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID_STAGING }}:role/staging-oidc-github-action'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build
+      - name: Build React storybook
+        run: |
+          cd packages/react
+          yarn storybook:build
+
+      - name: Configure AWS credentials using OIDC # Ref: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ env.AWS_IAM_OIDC_GITHUB_ROLE_ARN }}
+          role-session-name: github_action
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy to S3
+        run:
+          aws s3 sync ./dist/packages/react/storybook-static/ s3://${{
+          env.BUCKET_NAME }}/${{ env.PR_NUMBER }} --delete
+
+  comment_on_pr:
+    runs-on: ubuntu-latest
+    needs: deploy
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Comment
+        env:
+          S3_URL: http://${{ env.BUCKET_NAME }}.s3-website.${{ env.AWS_REGION }}.amazonaws.com
+          PR_NUMBER: ${{ env.PR_NUMBER }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${ process.env.S3_URL }/${ process.env.PR_NUMBER }`
+            })
