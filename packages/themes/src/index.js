@@ -25,7 +25,7 @@ const themes = {
   platon,
 };
 
-export * from './white';
+export * from './platon';
 export {
   white,
   g10,
