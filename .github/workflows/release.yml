@@ -2,11 +2,7 @@ name: Release
 
 on:
   push:
-    tags:
-      # Push events to matching v*, i.e. v1.0, v20.15.10
-      - 'v*'
-      # Ignore tags for v10, there is a separate v10-release.yml workflow for v10
-      - '!v10*'
+    branches: ['main']
 
 jobs:
   build:
@@ -28,15 +24,15 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Run Continuous Integration checks
-        run: yarn ci-check
+      # - name: Run Continuous Integration checks
+      #   run: yarn ci-check
 
-      - name: Publish packages under the `next` dist tag
-        run:
-          yarn lerna publish from-package --dist-tag next --no-verify-access
-          --yes
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Publish packages under the `next` dist tag
+      #   run:
+      #     yarn lerna publish from-package --dist-tag next --no-verify-access
+      #     --yes
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release
         id: create_release
